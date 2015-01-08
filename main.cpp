@@ -13,11 +13,23 @@ struct node {
   bool visited;
 };
 
-int main () {
-  int v[] = { 98, 183, 37, 122, 14, 124, 65, 67 };
-  const int MAX_SIZE = 200;
+int main (int argc, char *argv[]) {
+  // Exit if incorrect arguments are specified.
+  if (argc <= 1) {
+    printf("arguments: <total_track_size> <total_cylinders> <cylinder>...\n");
+    exit(1);
+  }
+  int *v;
+  const int MAX_SIZE = atoi(argv[1]);
+  int len = atoi(argv[2]);
+  int i;
+  v = (int*)malloc(len * sizeof(int));
+  for (i = 0; i < len; i++) {
+    v[i] = atoi(argv[i + 3]);
+  }
+
+  // Initial cylinder.
   int init = 53;
-  int len = sizeof(v) / sizeof(v[0]), i;
 
   // FCFS.
   int diff = abs(v[0] - init);
